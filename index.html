@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carnet de recettes | Cuisine & Inspiration</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="min-h-screen bg-[#FAF8F5] text-[#29251F] font-sans">
+
+  <!-- HEADER -->
+  <header class="bg-white/90 border-b border-orange-100">
+    <nav class="max-w-7xl mx-auto px-5 py-5 flex items-center justify-between">
+
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-11 h-11 bg-orange-400 rounded-2xl flex items-center justify-center text-2xl">
+          🍳
+        </div>
+
+        <div>
+          <h1 class="font-extrabold text-xl tracking-tight">
+            Carnet <span class="text-orange-500">De</span> Reccettes<span class="text-orange-500">.</span>
+          </h1>
+          <p class="text-xs text-gray-400">La cuisine nous rassemble</p>
+        </div>
+      </a>
+    </nav>
+  </header>
+
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-5 py-10 md:py-16">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-[#29251F] rounded-[2rem] p-7 md:p-14 mb-12">
+
+      <div class="relative z-10 max-w-2xl">
+
+        <span class="inline-flex items-center gap-2 text-orange-300 text-sm font-semibold mb-5">
+          <span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+          BIENVENUE DANS NOTRE CUISINE
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5">
+          Découvrez des recettes,
+          <span class="text-orange-400">créez des souvenirs.</span>
+        </h2>
+
+        <p class="text-gray-300 text-sm md:text-base leading-relaxed max-w-lg">
+          Explorez notre collection de recettes et trouvez
+          l'inspiration pour votre prochain atelier cuisine.
+        </p>
+
+        <a href="#recipes-section"
+           class="inline-block mt-8 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition">
+          Découvrir les recettes ↓
+        </a>
+
+      </div>
+
+      <div class="absolute -right-16 -bottom-24 w-72 h-72 md:w-96 md:h-96 rounded-full border-[35px] border-orange-500/10"></div>
+      <div class="absolute right-10 top-8 text-7xl opacity-10 hidden md:block">🍲</div>
+
+    </section>
+
+
+    <!-- RECIPES HEADER -->
+    <section id="recipes-section">
+
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+
+        <div>
+          <p class="text-orange-500 font-bold text-sm mb-2">
+            NOTRE COLLECTION
+          </p>
+
+          <h2 class="text-2xl md:text-3xl font-extrabold">
+            Nos recettes
+          </h2>
+
+          <p class="text-gray-500 mt-2 text-sm">
+            Des idées gourmandes pour tous les goûts.
+          </p>
+        </div>
+
+        <div class="bg-white border border-orange-100 rounded-2xl px-5 py-3 shadow-sm">
+          <p class="text-xs text-gray-400 font-medium">RECETTES DISPONIBLES</p>
+
+          <p class="text-2xl font-extrabold text-orange-500">
+            <span id="recipes-count">0</span>
+            <span class="text-sm text-gray-400 font-medium">recettes</span>
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- RECIPES GRID -->
+      <div
+        id="recipes-container"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        Les recettes seront ajoutées avec JavaScript
+     </div>
+    </section>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="border-t border-orange-100 bg-white mt-16">
+    <div class="max-w-7xl mx-auto px-5 py-7 text-center">
+      <p class="text-xs text-gray-400 mt-2">
+        &copy; 2026 Carnet de recettes. Tous droits réservés.
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- RECIPE TEMPLATE -->
+  <section id="recipe-container">
+
+    <!-- <article class="recipe-card group bg-white rounded-3xl overflow-hidden border border-[#ffedd5b3] hover:shadow-xl">
+
+      <div class="relative overflow-hidden">
+        <img
+          class="recipe-image w-full h-56 object-cover group-hover:scale-105 transition duration-500"
+          src=""
+          alt=""
+          loading="lazy"
+        >
+        <span class="absolute top-4 left-4 bg-white/95 text-orange-600 text-xs font-bold px-3 py-2 rounded-full">
+          🍽️ Recette
+        </span>
+      </div>
+
+      <div class="p-5">
+
+        <h3 class="recipe-name text-lg font-bold mb-4 line-clamp-2">
+          Nom de la recette
+        </h3>
+
+        <div class="flex items-center justify-between text-sm mb-4">
+          <span class="text-gray-400">Cuisine</span>
+          <span class="recipe-cuisine font-semibold text-gray-700"></span>
+        </div>
+
+        <div class="flex items-center justify-between text-sm mb-4">
+          <span class="text-gray-400">Difficulté</span>
+          <span class="recipe-difficulty bg-orange-50 text-orange-600 font-semibold px-3 py-1 rounded-full"></span>
+        </div>
+
+        <div class="flex items-center justify-between text-sm pt-4 border-t border-gray-100">
+          <span class="text-gray-400">⏱️ Préparation</span>
+          <span class="recipe-time font-bold text-gray-800"></span>
+        </div>
+
+      </div>
+
+    </article> -->
+
+  </section>
+
+
+  <!-- JAVASCRIPT -->
+  <script type="module" src="./js/script.js"></script>
+
+</body>
+</html>
