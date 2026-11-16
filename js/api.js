@@ -8,7 +8,7 @@ const api= axios.create({
 export async function getRecipes(){
     try{
         const response = await api.get(
-            "/recipes?limit=12"
+            "/recipes?limit=15"
         );
         return response.data;
     } catch (error){
