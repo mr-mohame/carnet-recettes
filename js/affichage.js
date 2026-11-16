@@ -15,7 +15,7 @@ export function createRecipeCard(recipe) {
 
     const span = document.createElement("span")
     span.classList.add("absolute", "top-4", "left-4", "bg-[#FFFFFFF2]", "text-orange-600", "text-xs", "font-bold", "px-3", "py-2", "rounded-full")
-    span.textContent = " 🍽️ Recette"
+    span.textContent = "Recette"
 
     div.appendChild(img)
     div.appendChild(span)
@@ -45,7 +45,7 @@ export function createRecipeCard(recipe) {
 
     const spanPreparation = document.createElement("span");
     spanPreparation.classList.add("text-gray-400");
-    spanPreparation.textContent = "⏱️ Préparation";
+    spanPreparation.textContent = " Préparation";
 
     const spanTime = document.createElement("span");
     spanTime.classList.add("recipe-time", "font-bold", "text-gray-800")
