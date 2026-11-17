@@ -1,4 +1,4 @@
-
+// function qui create la carte de recette 
 export function createRecipeCard(recipe) {
 
     const article = document.createElement("article");
@@ -70,6 +70,7 @@ export function createRecipeCard(recipe) {
     return article;
 }
 
+// fonction qui afficher la carte de recette 
 export function displayRecipes(recipes){
     const recipes_container = document.querySelector("#recipes-container")
 
