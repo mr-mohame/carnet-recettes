@@ -17,5 +17,18 @@ export async function getRecipes(){
     }
 }
 
+// fonction pour faire la recherche sur les recette
+export async function searchRecipes(keyword) {
+    try{
+        const response = await api.get("/recipes/search", {
+            params: {q: keyword }
+        });
+        return response.data;
+    }catch (error){
+        throw error;
+        
 
+    }
+    
+}
 
