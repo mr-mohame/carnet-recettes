@@ -43,6 +43,7 @@ barr_search.addEventListener("submit", async function (event) {
             msg_erreur.textContent = "recette introuvable";
             msg_erreur.classList.remove("hidden");
             displayRecipes([]);
+            btnRoutesRecettes.classList.remove("hidden");
             return;
         }
         // Afficher les resultats
@@ -76,5 +77,12 @@ inputSearch.addEventListener("input", function () {
         initRecipes();
     }
 });
+// pour afficher la btn voir toutes les recettes
+const btnRoutesRecettes = document.querySelector("#btn-toutes-recettes");
+btnRoutesRecettes.addEventListener("click", function(){
+    initRecipes();
+    msg_erreur.classList.add("hidden");
+    btnRoutesRecettes.classList.add("hidden");
+})
 
 
