@@ -32,3 +32,10 @@ export async function searchRecipes(keyword) {
     
 }
 
+// fonction pour ajouter un recette sur api 
+export async function ajouterRecette(nouvelleRecette) {
+    
+    const response = await api.post("/recipes/add", nouvelleRecette);
+    return response.data;
+}
+

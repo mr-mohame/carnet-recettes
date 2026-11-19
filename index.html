@@ -118,7 +118,8 @@
           Reessayer
         </button>
         <!-- btn pour voir toutes les recettes -->
-        <button id="btn-toutes-recettes" type="button" class="hidden block mx-auto mt-3 rounded-xl bg-orange-500 px-6 py-3 text-white">
+        <button id="btn-toutes-recettes" type="button"
+          class="hidden block mx-auto mt-3 rounded-xl bg-orange-500 px-6 py-3 text-white">
           Voir toutes les recettes
         </button>
 
@@ -128,6 +129,60 @@
       <div id="recipes-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         Les recettes seront ajoutées avec JavaScript
       </div>
+    </section>
+
+
+    <!-- Ajouter une recette -->
+    <section id="section-recipes-ajouter" class="bg-white rounded-2xl mt-4 p-6 md:p-8 shadow-sm border border-gray-100">
+      <div class="mb-8">
+        <h2 class="text-2xl md:text-3xl font-extrabold">
+          Ajouter une recette
+        </h2>
+      </div>
+
+      <form id="recette-ajouter" class="flex flex-col gap-3">
+
+        <!-- Nom -->
+        <label for="nom" class="block mb-2 text-sm font-semibold text-gray-700">Nom</label>
+        <input type="text" id="nom" name="nom" placeholder="Tajine poulet" minlength="3" maxlength="60" required
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none">
+        <!-- mg erreur -->
+        <p id="erreur-nom" class="hidden text-red-500"></p>
+
+        <!-- Cuisine -->
+        <label for="cuisine" class="block mb-2 text-sm font-semibold text-gray-700">Cuisine</label>
+        <input type="text" id="cuisine" name="cuisine" placeholder="Italian, Moroccan..." required
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none">
+        <!-- mg erreur -->
+        <p id="erreur-cuisine" class="hidden text-red-500"></p>
+
+        <!-- Difficulte -->
+        <label for="difficulte" class="block mb-2 text-sm font-semibold text-gray-700">Difficulté</label>
+        <select name="difficulte" id="difficulte" required
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none">
+          <!-- mg erreur -->
+          <p id="erreur-difficulte" class="hidden text-red-500"></p>
+          <option value="">Choisir une difficulté</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+
+        <!-- Temps -->
+        <label for="temps" class="block mb-2 text-sm font-semibold text-gray-700">Temps de préparation</label>
+        <input type="number" id="temps" name="temps" min="1" max="300" step="1" required placeholder="1 à 300 minutes"
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none">
+        <!-- mg erreur -->
+        <p id="erreur-temps" class="hidden text-red-500"></p>
+        <!-- btn -->
+        <button id="btn-ajouter" type="submit"
+          class="rounded-xl bg-orange-500 px-6 py-3 font-semibold text-white transition hover:bg-orange-600">
+          Ajouter la recette
+        </button>
+
+      </form>
+
+
     </section>
   </main>
 
@@ -145,46 +200,24 @@
   <!-- RECIPE TEMPLATE -->
   <section id="recipe-container">
 
-    <!-- <article class="recipe-card group bg-white rounded-3xl overflow-hidden border border-[#ffedd5b3] hover:shadow-xl">
-
-      <div class="relative overflow-hidden">
-        <img
-          class="recipe-image w-full h-56 object-cover group-hover:scale-105 transition duration-500"
-          src=""
-          alt=""
-          loading="lazy"
-        >
-        <span class="absolute top-4 left-4 bg-white/95 text-orange-600 text-xs font-bold px-3 py-2 rounded-full">
-          🍽️ Recette
-        </span>
-      </div>
-
-      <div class="p-5">
-
-        <h3 class="recipe-name text-lg font-bold mb-4 line-clamp-2">
-          Nom de la recette
-        </h3>
-
-        <div class="flex items-center justify-between text-sm mb-4">
-          <span class="text-gray-400">Cuisine</span>
-          <span class="recipe-cuisine font-semibold text-gray-700"></span>
-        </div>
-
-        <div class="flex items-center justify-between text-sm mb-4">
-          <span class="text-gray-400">Difficulté</span>
-          <span class="recipe-difficulty bg-orange-50 text-orange-600 font-semibold px-3 py-1 rounded-full"></span>
-        </div>
-
-        <div class="flex items-center justify-between text-sm pt-4 border-t border-gray-100">
-          <span class="text-gray-400">⏱️ Préparation</span>
-          <span class="recipe-time font-bold text-gray-800"></span>
-        </div>
-
-      </div>
-
-    </article> -->
-
   </section>
+
+  <!-- popup pour la reussir dajouter un recette -->
+  <div id="popup-succes" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <h2>Recette ajoutée !</h2>
+      <p>Votre recette a été ajoutée avec succès.</p>
+      <button id="btn-fermer" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
+
+  <!-- popup pour l'erreur dajouter un recette -->
+  <div id="popup-erreur" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <p>Impossible d'ajouter la recette. Veuillez réessayer.</p>
+      <button id="btn-fermerErr" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
 
 
   <!-- JAVASCRIPT -->
