@@ -13,6 +13,7 @@ export async function getRecipes(){
         return response.data;
     } catch (error){
         console.log(error);
+        throw error;
         
     }
 }

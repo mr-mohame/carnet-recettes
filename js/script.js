@@ -3,10 +3,19 @@ import { displayRecipes, createRecipeCard } from './affichage.js';
 import { validerNom, validerCuisine, validerDifficulte, validerTemps } from './validation.js';
 
 async function initRecipes() {
-    const data = await getRecipes();
-    // console.log(data)
+    msg_erreur.classList.add("hidden");
+    try {
+        const data = await getRecipes();
+        // console.log(data)
+        displayRecipes(data.recipes);
 
-    displayRecipes(data.recipes);
+    }catch(error){
+        console.log("erreur", error)
+        msg_erreur.textContent = "une erreur est survenue. reessayez.";
+        msg_erreur.classList.remove("hidden");
+
+    }
+    
 }
 initRecipes()
 
@@ -36,7 +45,7 @@ barr_search.addEventListener("submit", async function (event) {
     msg_erreur.classList.add("hidden");
     btn_reessayer.classList.add("hidden");
     // afficher le chargemenet 
-    msg_loading.classList.add("hidden");
+    msg_loading.classList.remove("hidden");
 
     try {
         const dataRecette = await searchRecipes(searchRecette);
@@ -47,6 +56,7 @@ barr_search.addEventListener("submit", async function (event) {
             btnRoutesRecettes.classList.remove("hidden");
             return;
         }
+        btnRoutesRecettes.classList.add("hidden");
         // Afficher les resultats
         displayRecipes(dataRecette.recipes);
 
@@ -151,7 +161,7 @@ recette_ajouter.addEventListener("submit", async function (event) {
     }
     // masque le popup erreur avant chaque essai
     popupErreur.classList.add("hidden");
-    
+
     try {
         btnAjouter.disabled = true
         // pour envoyer le nouvel recette a l'api
@@ -181,16 +191,16 @@ recette_ajouter.addEventListener("submit", async function (event) {
 
 })
 
-btnFermer.addEventListener("click", function(){
+btnFermer.addEventListener("click", function () {
     popupSucces.classList.add("hidden")
 })
 
-btnFermerErr.addEventListener("click", function(){
+btnFermerErr.addEventListener("click", function () {
     popupErreur.classList.add("hidden");
 })
 
 
-
+initRecipes()
 
 
 
