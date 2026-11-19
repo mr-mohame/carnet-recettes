@@ -17,7 +17,7 @@ async function initRecipes() {
     }
     
 }
-initRecipes()
+// initRecipes()
 
 const barr_search = document.querySelector(".barr-search");
 const inputSearch = document.querySelector(".input-search");
