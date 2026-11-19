@@ -7,7 +7,6 @@ async function initRecipes() {
     try {
         const data = await getRecipes();
         // console.log(data)
-
         displayRecipes(data.recipes);
 
     }catch(error){
@@ -201,7 +200,7 @@ btnFermerErr.addEventListener("click", function () {
 })
 
 
-
+initRecipes()
 
 
 
