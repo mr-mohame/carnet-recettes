@@ -1,5 +1,6 @@
-import { getRecipes, searchRecipes } from './api.js';
-import { displayRecipes } from './affichage.js';
+import { getRecipes, searchRecipes, ajouterRecette } from './api.js';
+import { displayRecipes, createRecipeCard } from './affichage.js';
+import { validerNom, validerCuisine, validerDifficulte, validerTemps } from './validation.js';
 
 async function initRecipes() {
     const data = await getRecipes();
@@ -9,13 +10,13 @@ async function initRecipes() {
 }
 initRecipes()
 
-
 const barr_search = document.querySelector(".barr-search");
 const inputSearch = document.querySelector(".input-search");
 const btn_search = document.querySelector("#btn-search");
 const msg_loading = document.querySelector("#msg-loading")
 const msg_erreur = document.querySelector("#msg-erreur")
 const btn_reessayer = document.querySelector("#btn-reessayer")
+const recipesContainer = document.querySelector("#recipes-container");
 
 // console.log(barr_search, inputSearch, btn_search);
 let derniereSearch = "";
@@ -49,7 +50,7 @@ barr_search.addEventListener("submit", async function (event) {
         // Afficher les resultats
         displayRecipes(dataRecette.recipes);
 
-    }catch(error){
+    } catch (error) {
         console.error(error);
 
         displayRecipes([]);
@@ -64,7 +65,7 @@ barr_search.addEventListener("submit", async function (event) {
         // cacher le chargement dans tous les cas
         msg_loading.classList.add("hidden");
     }
-    
+
 })
 // pour affiche le btn ressaayer 
 btn_reessayer.addEventListener("click", function () {
@@ -79,10 +80,118 @@ inputSearch.addEventListener("input", function () {
 });
 // pour afficher la btn voir toutes les recettes
 const btnRoutesRecettes = document.querySelector("#btn-toutes-recettes");
-btnRoutesRecettes.addEventListener("click", function(){
+btnRoutesRecettes.addEventListener("click", function () {
     initRecipes();
     msg_erreur.classList.add("hidden");
     btnRoutesRecettes.classList.add("hidden");
 })
+
+// pour ajouter un recette sur le formulaire 
+
+const recette_ajouter = document.querySelector("#recette-ajouter")
+const nom_Rectte = document.querySelector("#nom");
+const cuisine = document.querySelector("#cuisine");
+const difficulte = document.querySelector("#difficulte");
+const temps = document.querySelector("#temps");
+const btnAjouter = document.querySelector("#btn-ajouter");
+// console.log(recette_ajouter, nom_Rectte, cuisine, difficulte, temps, btnAjouter);
+
+// msg d'erreur
+const erreur_nom = document.querySelector("#erreur-nom");
+const erreur_cuisine = document.querySelector("#erreur-cuisine");
+const erreur_difficulte = document.querySelector("#erreur-difficulte");
+const erreur_temps = document.querySelector("#erreur-temps");
+
+//affiche le popup de msg succes
+const popupSucces = document.querySelector("#popup-succes");
+const btnFermer = document.querySelector("#btn-fermer");
+
+const popupErreur = document.querySelector("#popup-erreur")
+const btnFermerErr = document.querySelector("#btn-fermerErr")
+
+recette_ajouter.addEventListener("submit", async function (event) {
+    event.preventDefault()
+    let formulaireValide = true;
+    erreur_nom.classList.add("hidden");
+    if (!validerNom(nom_Rectte.value)) {
+        erreur_nom.textContent = "Le nom doit contenir entre 3 et 60 caractères";
+        erreur_nom.classList.remove("hidden");
+        formulaireValide = false
+    }
+
+    erreur_cuisine.classList.add("hidden");
+    if (!validerCuisine(cuisine.value)) {
+        erreur_cuisine.textContent = "veuillez saisir la cuissine ex: italie ... ";
+        erreur_cuisine.classList.remove("hidden");
+        formulaireValide = false;
+    }
+
+    erreur_difficulte.classList.add("hidden");
+    if (!validerDifficulte(difficulte.value)) {
+        erreur_difficulte.textContent = "veuillez choisir la difficulte :Easy, Medium, hard  ";
+        erreur_difficulte.classList.remove("hidden");
+        formulaireValide = false;
+    }
+
+    erreur_temps.classList.add("hidden");
+    if (!validerTemps(temps.value)) {
+        erreur_temps.textContent = "veuillez entre le temps enter 1 et 300 minutes. ";
+        erreur_temps.classList.remove("hidden");
+        formulaireValide = false;
+    }
+    if (!formulaireValide) {
+        return;
+    }
+
+    const nouvelleRecette = {
+        name: nom_Rectte.value,
+        cuisine: cuisine.value,
+        difficulty: difficulte.value,
+        prepTimeMinutes: Number(temps.value)
+    }
+    // masque le popup erreur avant chaque essai
+    popupErreur.classList.add("hidden");
+    
+    try {
+        btnAjouter.disabled = true
+        // pour envoyer le nouvel recette a l'api
+        const recette = await ajouterRecette(nouvelleRecette)
+        // console.log(recette);
+
+        // cree carte 
+        const nouvelleCarte = createRecipeCard(recette);
+
+        // ajouter le nouvel recette 
+        recipesContainer.prepend(nouvelleCarte);
+
+        popupSucces.classList.remove("hidden");
+
+        // pour reset du formulaire
+        recette_ajouter.reset()
+
+    } catch (error) {
+        console.log("Erreur", error);
+        popupErreur.classList.remove("hidden");
+
+
+    } finally {
+        btnAjouter.disabled = false
+    }
+
+
+})
+
+btnFermer.addEventListener("click", function(){
+    popupSucces.classList.add("hidden")
+})
+
+btnFermerErr.addEventListener("click", function(){
+    popupErreur.classList.add("hidden");
+})
+
+
+
+
+
 
 
