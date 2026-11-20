@@ -128,7 +128,7 @@ git clone https://github.com/mr-mohame/carnet-recettes.git
 
 ## 🌍 Démo en ligne
 
-[Accéder à l'application](TON_LIEN_GITHUB_PAGES)
+[Accéder à l'application](https://mr-mohame.github.io/carnet-recettes/)
 
 ## 👨‍💻 Auteur
 
