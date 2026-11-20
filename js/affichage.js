@@ -51,6 +51,18 @@ export function createRecipeCard(recipe) {
     spanTime.classList.add("recipe-time", "font-bold", "text-gray-800")
     spanTime.textContent = `${recipe.prepTimeMinutes} min`;
 
+    // Créer le bouton
+    const btnSupprimer = document.createElement("button");
+    // Ajouter le texte
+    btnSupprimer.textContent = "Supprimer";
+
+
+    // Ajouter le style Tailwind
+    btnSupprimer.classList.add("cursor-pointer", "bg-[#f97316]", "text-white", "px-4", "py-2", "rounded-lg", "w-full", "mt-4");
+    btnSupprimer.dataset.id = recipe.id;
+    btnSupprimer.classList.add("btn-supprimer");
+
+
     // aajouter la cuisine et diffi dans le divText
     divText.appendChild(span_Cuisine);
     divText.appendChild(span_recipeDifficulty);
@@ -59,10 +71,11 @@ export function createRecipeCard(recipe) {
     divPreparation.appendChild(spanPreparation);
     divPreparation.appendChild(spanTime);
 
-    // Ajouter les recipe_name et divText et divPreparation dans recipe_div
+    // Ajouter les recipe_name et divText et divPreparation et btn supprime dans recipe_div
     recipe_div.appendChild(recipe_name);
     recipe_div.appendChild(divText);
     recipe_div.appendChild(divPreparation);
+    recipe_div.appendChild(btnSupprimer);
 
     // Ajouter recipe_div dans article
     article.appendChild(recipe_div);
@@ -71,7 +84,7 @@ export function createRecipeCard(recipe) {
 }
 
 // fonction qui afficher la carte de recette 
-export function displayRecipes(recipes){
+export function displayRecipes(recipes) {
     const recipes_container = document.querySelector("#recipes-container")
 
     // pour affiche combien des recipes
@@ -84,9 +97,9 @@ export function displayRecipes(recipes){
     // boucle sur recipes 
     recipes.forEach(recipe => {
 
-       const card = createRecipeCard(recipe)
+        const card = createRecipeCard(recipe)
 
-       recipes_container.appendChild(card);
+        recipes_container.appendChild(card);
     });
 
 

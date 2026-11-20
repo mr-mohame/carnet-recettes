@@ -1,4 +1,4 @@
-import { getRecipes, searchRecipes, ajouterRecette } from './api.js';
+import { getRecipes, searchRecipes, ajouterRecette, supprimeRecette } from './api.js';
 import { displayRecipes, createRecipeCard } from './affichage.js';
 import { validerNom, validerCuisine, validerDifficulte, validerTemps } from './validation.js';
 
@@ -199,7 +199,77 @@ btnFermerErr.addEventListener("click", function () {
     popupErreur.classList.add("hidden");
 })
 
+const popupSupprimer = document.querySelector("#popup-supprimer");
+const btnAnnuler = document.querySelector("#btn-Annuler");
+const btnConfirme = document.querySelector("#btn-confirmer");
+//pour enregisster l'id et la carte pour la recette qui on a choisir pour supprime
+let recetteSelectionnee = null;
+let carteSelectionnee = null;
 
+recipesContainer.addEventListener("click", function(event){
+    const btn = event.target.closest(".btn-supprimer");
+    if(!btn){
+        return;
+    }
+    recetteSelectionnee = btn.dataset.id;
+
+    carteSelectionnee = btn.closest("article"); 
+
+    popupSupprimer.classList.remove("hidden")
+
+})
+
+
+btnAnnuler.addEventListener("click", function () {
+    popupSupprimer.classList.add("hidden");
+    recetteSelectionnee = null;
+    carteSelectionnee = null;
+});
+const recipesCount = document.querySelector("#recipes-count");
+
+//affiche le popup de msg supprime
+const popupSuccesSupprime = document.querySelector("#popup-succesSupprime");
+const btnFermeSup = document.querySelector("#btn-fermeSup");
+const popupErreurSupprime = document.querySelector("#popup-erreurSupprime")
+const btnFermerErrSup = document.querySelector("#btn-fermerErrSup")
+
+popupErreurSupprime.classList.add("hidden");
+btnConfirme.addEventListener("click", async function () {
+    try{
+        const response = await supprimeRecette(recetteSelectionnee);
+        carteSelectionnee.remove();
+        recipesCount.textContent = Number(recipesCount.textContent) - 1;
+        popupSupprimer.classList.add("hidden");
+
+        // efficher le popup de succes
+        popupSuccesSupprime.classList.remove("hidden");
+
+         // reinitialiser les variables
+        recetteSelectionnee = null;
+        carteSelectionnee = null;
+
+
+    }catch(error){
+        console.log("Erreur suppression", error);
+
+        // fermer le popup de confirmation
+        popupSupprimer.classList.add("hidden");
+    } finally {
+        btnConfirme.disabled = false;
+    }
+    
+
+
+});
+// fermer le popup de succès
+btnFermeSup.addEventListener("click", function () {
+    popupSuccesSupprime.classList.add("hidden");
+});
+
+// fermer le popup d'erreur
+btnFermerErrSup.addEventListener("click", function () {
+    popupErreurSupprime.classList.add("hidden");
+});
 initRecipes()
 
 

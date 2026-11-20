@@ -40,3 +40,10 @@ export async function ajouterRecette(nouvelleRecette) {
     return response.data;
 }
 
+// function pour supprime un recette sur api 
+export async function supprimeRecette(id) {
+    
+    const response = await api.delete(`/recipes/${id}`);
+    return response.data;
+}
+
