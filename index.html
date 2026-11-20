@@ -210,12 +210,42 @@
       <button id="btn-fermer" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
     </div>
   </div>
-
-  <!-- popup pour l'erreur dajouter un recette -->
+   <!-- popup pour l'erreur dajouter un recette -->
   <div id="popup-erreur" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
     <div class="bg-white p-6 rounded-xl text-center">
       <p>Impossible d'ajouter la recette. Veuillez réessayer.</p>
       <button id="btn-fermerErr" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
+
+   <!-- popup pour la reussir de supprime un recette -->
+  <div id="popup-succesSupprime" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <h2>Recette supprime !</h2>
+      <p>Votre recette a été supprime avec succès.</p>
+      <button id="btn-fermeSup" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
+
+   <!-- popup pour l'erreur de supprime un recette -->
+  <div id="popup-erreurSupprime" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <p>Impossible de supprime la recette. Veuillez réessayer.</p>
+      <button id="btn-fermerErrSup" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
+
+ 
+
+  <!-- popup pour confirme la supprime dun recette -->
+  <div id="popup-supprimer" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <h2>Confirmer la suppression</h2>
+      <p>Êtes-vous sûr de vouloir supprimer cette recette ?</p>
+      <div class="flex gap-3 mt-3 ">
+        <button id="btn-Annuler" class="bg-gray-500 rounded-2xl w-full cursor-pointer shadow-sm">Annuler</button>
+        <button id="btn-confirmer" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Confirmer</button>
+      </div>
     </div>
   </div>
 
