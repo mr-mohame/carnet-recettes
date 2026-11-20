@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carnet de recettes | Cuisine & Inspiration</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="min-h-screen bg-[#FAF8F5] text-[#29251F] font-sans">
+
+  <!-- HEADER -->
+  <header class="bg-white border-b border-gray-100">
+    <nav class="max-w-7xl mx-auto px-5 py-5 flex items-center justify-between">
+
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-11 h-11 bg-orange-400 rounded-2xl flex items-center justify-center text-2xl">
+          🍳
+        </div>
+
+        <div>
+          <h1 class="font-extrabold text-xl tracking-tight">
+            Carnet <span class="text-orange-500">De</span> Reccettes<span class="text-orange-500">.</span>
+          </h1>
+          <p class="text-xs text-gray-400">La cuisine nous rassemble</p>
+        </div>
+      </a>
+    </nav>
+  </header>
+
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-5 py-10 md:py-16">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-[#29251F] rounded-[2rem] p-7 md:p-14 mb-12">
+
+      <div class="relative z-10 max-w-2xl">
+
+        <span class="inline-flex items-center gap-2 text-orange-300 text-sm font-semibold mb-5">
+          <span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+          BIENVENUE DANS NOTRE CUISINE
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5">
+          Découvrez des recettes,
+          <span class="text-orange-400">créez des souvenirs.</span>
+        </h2>
+
+        <p class="text-gray-300 text-sm md:text-base leading-relaxed max-w-lg">
+          Explorez notre collection de recettes et trouvez
+          l'inspiration pour votre prochain atelier cuisine.
+        </p>
+
+        <a href="#recipes-section"
+          class="inline-block mt-8 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition">
+          Découvrir les recettes ↓
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- RECIPES HEADER -->
+    <section id="recipes-section">
+
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+
+        <div>
+          <p class="text-orange-500 font-bold text-sm mb-2">
+            NOTRE COLLECTION
+          </p>
+
+          <h2 class="text-2xl md:text-3xl font-extrabold">
+            Nos recettes
+          </h2>
+
+          <p class="text-gray-500 mt-2 text-sm">
+            Des idées gourmandes pour tous les goûts.
+          </p>
+        </div>
+
+        <div class="bg-white border border-orange-100 rounded-2xl px-5 py-3 shadow-sm">
+          <p class="text-xs text-gray-400 font-medium">RECETTES DISPONIBLES</p>
+
+          <p class="text-2xl font-extrabold text-orange-500">
+            <span id="recipes-count">0</span>
+            <span class="text-sm text-gray-400 font-medium">recettes</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- barre de recherch avec btn recherche -->
+      <div class="w-full mb-8">
+        <form class="barr-search flex w-full gap-2">
+          <input type="text" placeholder="rechercher une recette ..." name="search"
+            class="input-search flex-1 min-w-0 px-4 border border-[#E5E7EB] rounded-xl outline-none hover:border-[#f97316]">
+          <button id="btn-search" type="submit"
+            class="shrink-0 px-5 py-3 bg-[#f97316] text-white font-semibold rounded-xl hover:bg-[#ea580c]">recherche</button>
+        </form>
+
+
+        <!-- partie loading -->
+        <p id="msg-loading" class="mt-4 hidden text-center text-sm font-medium text-orange-600">
+          Chargement des recettes...
+        </p>
+        <!-- message erreur -->
+        <p id="msg-erreur" class="mt-4 hidden text-center text-sm font-medium text-red-600">
+        </p>
+        <!-- bouton reessayer -->
+        <button id="btn-reessayer" type="button"
+          class="hidden block mx-auto mt-3 rounded-xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-sm  hover:bg-orange-600 cursor-pointer">
+          Reessayer
+        </button>
+        <!-- btn pour voir toutes les recettes -->
+        <button id="btn-toutes-recettes" type="button"
+          class="hidden block mx-auto mt-3 rounded-xl bg-orange-500 px-6 py-3 text-white">
+          Voir toutes les recettes
+        </button>
+
+      </div>
+
+      <!-- RECIPES GRID -->
+      <div id="recipes-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        Les recettes seront ajoutées avec JavaScript
+      </div>
+    </section>
+
+
+    <!-- Ajouter une recette -->
+    <section id="section-recipes-ajouter" class="bg-white rounded-2xl mt-4 p-6 md:p-8 shadow-sm border border-gray-100">
+      <div class="mb-8">
+        <h2 class="text-2xl md:text-3xl font-extrabold">
+          Ajouter une recette
+        </h2>
+      </div>
+
+      <form id="recette-ajouter" class="flex flex-col gap-3">
+
+        <!-- Nom -->
+        <label for="nom" class="block mb-2 text-sm font-semibold text-gray-700">Nom</label>
+        <input type="text" id="nom" name="nom" placeholder="Tajine poulet" minlength="3" maxlength="60" required
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none">
+        <!-- mg erreur -->
+        <p id="erreur-nom" class="hidden text-red-500"></p>
+
+        <!-- Cuisine -->
+        <label for="cuisine" class="block mb-2 text-sm font-semibold text-gray-700">Cuisine</label>
+        <input type="text" id="cuisine" name="cuisine" placeholder="Italian, Moroccan..." required
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none">
+        <!-- mg erreur -->
+        <p id="erreur-cuisine" class="hidden text-red-500"></p>
+
+        <!-- Difficulte -->
+        <label for="difficulte" class="block mb-2 text-sm font-semibold text-gray-700">Difficulté</label>
+        <select name="difficulte" id="difficulte" required
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none">
+          <!-- mg erreur -->
+          <p id="erreur-difficulte" class="hidden text-red-500"></p>
+          <option value="">Choisir une difficulté</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+
+        <!-- Temps -->
+        <label for="temps" class="block mb-2 text-sm font-semibold text-gray-700">Temps de préparation</label>
+        <input type="number" id="temps" name="temps" min="1" max="300" step="1" required placeholder="1 à 300 minutes"
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none">
+        <!-- mg erreur -->
+        <p id="erreur-temps" class="hidden text-red-500"></p>
+        <!-- btn -->
+        <button id="btn-ajouter" type="submit"
+          class="rounded-xl bg-orange-500 px-6 py-3 font-semibold text-white transition hover:bg-orange-600">
+          Ajouter la recette
+        </button>
+
+      </form>
+
+
+    </section>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="border-t border-orange-100 bg-white mt-16">
+    <div class="max-w-7xl mx-auto px-5 py-7 text-center">
+      <p class="text-xs text-gray-400 mt-2">
+        &copy; 2026 Carnet de recettes. Tous droits réservés.
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- RECIPE TEMPLATE -->
+  <section id="recipe-container">
+
+  </section>
+
+  <!-- popup pour la reussir dajouter un recette -->
+  <div id="popup-succes" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <h2>Recette ajoutée !</h2>
+      <p>Votre recette a été ajoutée avec succès.</p>
+      <button id="btn-fermer" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
+  <!-- popup pour l'erreur dajouter un recette -->
+  <div id="popup-erreur" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <p id="msg-erreur-ajout">Impossible d'ajouter la recette. Veuillez réessayer.</p>
+      <button id="btn-fermerErr" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
+
+  <!-- popup pour la reussir de supprime un recette -->
+  <div id="popup-succesSupprime" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <h2>Recette supprime !</h2>
+      <p>Votre recette a été supprime avec succès.</p>
+      <button id="btn-fermeSup" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
+
+  <!-- popup pour l'erreur de supprime un recette -->
+  <div id="popup-erreurSupprime" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <p id="msg-erreur-suppression">Impossible de supprime la recette. Veuillez réessayer.</p>
+      <button id="btn-fermerErrSup" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Fermer</button>
+    </div>
+  </div>
+
+
+
+  <!-- popup pour confirme la supprime dun recette -->
+  <div id="popup-supprimer" class="hidden fixed inset-0 flex items-center justify-center bg-[#00000080] z-50">
+    <div class="bg-white p-6 rounded-xl text-center">
+      <h2>Confirmer la suppression</h2>
+      <p>Êtes-vous sûr de vouloir supprimer cette recette ?</p>
+      <div class="flex gap-3 mt-3 ">
+        <button id="btn-Annuler" class="bg-gray-500 rounded-2xl w-full cursor-pointer shadow-sm">Annuler</button>
+        <button id="btn-confirmer" class="bg-orange-500 rounded-2xl w-full cursor-pointer shadow-sm">Confirmer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- btn pour Réessayer  -->
+  <button id="btn-reessayer" class="hidden">
+    Réessayer
+  </button>
+
+
+  <!-- JAVASCRIPT -->
+  <script type="module" src="./js/script.js"></script>
+
+</body>
+
+</html>
